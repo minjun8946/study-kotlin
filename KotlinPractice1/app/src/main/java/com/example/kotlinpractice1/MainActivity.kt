@@ -15,6 +15,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onNext(t: String) { // 값이 하난 전달 될때마다 호출
                 println("값이 전달 되었습니다 $t")
+                text.text = t
             }
 
             override fun onSubscribe(d: Disposable) { // 구독을 할 때 호출
@@ -55,6 +57,8 @@ class MainActivity : AppCompatActivity() {
 
 
         }
+
+
         put.addTextChangedListener(object: TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 println("입력하기 전입니다. ${put.text}")
@@ -68,9 +72,13 @@ class MainActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 println("입력 중입니다, ${put.text}")
                 putString =put.toString()
-                val observable = Observable.just(putString)
+                val observable = Observable.create<String>{
+                    it.onNext(put.text.toString())
+
+                }
 
                 observable.subscribe(observable1)
+
             }
         })
 
