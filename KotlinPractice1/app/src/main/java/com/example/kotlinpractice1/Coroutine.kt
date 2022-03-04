@@ -1,20 +1,22 @@
 package com.example.kotlinpractice1
 
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.asFlow
 import kotlin.system.measureTimeMillis
 
+@DelicateCoroutinesApi
 fun main(){
-    runBlocking {
-        val exeTime = longRunningTsk()
-        println("Execution Time is $exeTime")
-    }
+    a()
+    b()
 }
 
-suspend fun longRunningTsk(): Long {
-    return measureTimeMillis {
-        println("Please wait")
-        delay(200)
-        println("Delay Over")
-    }
+
+
+ fun a(){
+    Thread.sleep(2000)
+    println("bbbb")
+}
+
+fun b(){
+    println("b")
 }
