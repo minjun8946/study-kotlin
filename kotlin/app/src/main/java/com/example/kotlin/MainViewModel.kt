@@ -3,24 +3,35 @@ package com.example.kotlin
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(): ViewModel() {
+class MainViewModel @Inject constructor() : ViewModel() {
 
 
-    val _stateFlow = MutableStateFlow(0)
+    private val _stateFlow = MutableStateFlow<Int>(0)
     val stateFlow: StateFlow<Int> = _stateFlow
 
-    fun a(){
+    fun a() {
         viewModelScope.launch {
-            for(i in 0..10){
-                delay(100)
-                _stateFlow.value = i
+            for (i in 0..10) {
+                _stateFlow.value = 1
             }
         }
+    }
+
+    init {
+        higherFun { b() }
+    }
+
+    private fun b(): String {
+        println("1111")
+        return "aaa"
+    }
+
+    private fun higherFun(func: () -> String) {
+        func.invoke()
     }
 
 }

@@ -2,13 +2,13 @@
 
 buildscript {
     dependencies {
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.28-alpha")
+        classpath("com.google.dagger:hilt-android-gradle-plugin:kotlin_in_action.28-alpha")
     }
 }
 
 plugins {
-    id 'com.android.application' version '7.1.2' apply false
-    id 'com.android.library' version '7.1.2' apply false
+    id 'com.android.application' version '7.1.kotlin_in_action' apply false
+    id 'com.android.library' version '7.1.kotlin_in_action' apply false
     id 'org.jetbrains.kotlin.android' version '1.6.10' apply false
 }
 
