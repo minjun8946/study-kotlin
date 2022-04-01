@@ -12,7 +12,7 @@ fun foo(): Flow<Int> = flow { // flow builder
 
 fun main() = runBlocking<Unit> {
     val a = flowOf(1,2).runningFold(emptyList<Int>()) { acc, value -> acc + value}.toList()
-    val b = flowOf(1,2).scan(listOf(1)) {acc : List<Int>, value: Int -> acc + value}.toList()
+    val b = flowOf(1,2).scan(emptyList()) { acc : List<Int>, value: Int -> acc + value}.toList()
 
     println(a)
     println(b)
